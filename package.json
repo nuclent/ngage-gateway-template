@@ -12,10 +12,13 @@
     "@nestjs/common": "^9",
     "@nestjs/config": "^2.2",
     "@nestjs/core": "^9",
+    "@nestjs/microservices": "^9",
     "@nestjs/platform-express": "^9",
     "@nuclent/be-caching": "^0.2",
     "@nuclent/be-core": "^0.2",
+    "@nuclent/ngage-be-common": "^0.1",
     "@nuclent/ngage-users": "^0.1",
+    "nats": "^2.8",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.0.0",
     "tslib": "^2.3.0"

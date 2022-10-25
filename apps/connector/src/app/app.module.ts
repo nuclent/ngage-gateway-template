@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common'
 import { cachingEnv } from '@nuclent/be-caching'
-import { CommonModule, natsEnv } from '@nuclent/be-core'
+import { CommonModule, NatsConsumerModule, natsEnv } from '@nuclent/be-core'
+import { AuthRpcModule, registerAuthRpcService } from '@nuclent/ngage-users'
 import { appEnv } from './app.env'
+import { AuthService } from './users/auth.service'
 
 @Module({
   imports: [
@@ -15,6 +17,10 @@ import { appEnv } from './app.env'
         cachingEnv,
       ],
     }),
+    // register communication module
+    NatsConsumerModule,
+    // register auth rpc module
+    AuthRpcModule.register({ providers: registerAuthRpcService(AuthService) }),
   ],
 })
 export class AppModule {}

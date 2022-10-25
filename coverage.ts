@@ -16,6 +16,7 @@ const BaseConfig: InitialOptionsTsJest = {
   collectCoverageFrom: ['**/*.ts'],
   coveragePathIgnorePatterns: ['/node_modules/', 'main.ts', 'index.ts', 'types/', 'env.ts'],
   coverageReporters: ['html'],
+  setupFiles: [`${root}/jest.setup.ts`],
 }
 
 type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
