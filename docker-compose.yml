@@ -1,0 +1,70 @@
+version: '3'
+
+services:
+  zookeeper:
+    container_name: ngage-zookeeper
+    image: wurstmeister/zookeeper:latest
+    deploy:
+      restart_policy:
+        condition: on-failure
+    networks:
+      - ngage
+
+  kafka:
+    container_name: ngage-kafka
+    image: wurstmeister/kafka:latest
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - '9092:9092'
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_LISTENERS: PLAINTEXT://:9092
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_DELETE_TOPIC_ENABLE: 'true'
+    networks:
+      - ngage
+
+  nats:
+    container_name: ngage-nats
+    image: nats:alpine
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          memory: 64Mb
+    ports:
+      - '4222:4222'
+    networks:
+      - ngage
+
+  redis:
+    container_name: ngage-redis
+    image: redis:alpine
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          memory: 64Mb
+    ports:
+      - '6379:6379'
+    environment:
+      REDIS_HOST: ${REDIS_HOST:-}
+      REDIS_PORT: ${REDIS_PORT:-6379}
+    networks:
+      - ngage
+
+networks:
+  ngage:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
