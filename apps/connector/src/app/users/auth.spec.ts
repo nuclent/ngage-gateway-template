@@ -1,11 +1,6 @@
 import { INestApplication, InternalServerErrorException } from '@nestjs/common'
 import { CommonModule, natsEnv, NatsConsumerModule, baseEnv, appConfig, NatsClientService } from '@nuclent/be-core'
-import {
-  ActionRequiredException,
-  ActionRequiredScreenEnum,
-  RpcActionEnum,
-  RpcActionPayload,
-} from '@nuclent/ngage-be-common'
+import { RpcActionEnum, RpcActionPayload } from '@nuclent/ngage-be-common'
 import { buildTestModule, context } from '@nuclent/be-testing'
 import {
   BaseAuthRpcService,
@@ -41,7 +36,6 @@ import {
   RpcForgotPasswordResponse,
   cmdForgotPassword,
 } from '@nuclent/ngage-users'
-import { throwError } from 'rxjs'
 import { AuthService } from './auth.service'
 import { ClientNats } from '@nestjs/microservices'
 

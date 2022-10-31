@@ -25,17 +25,31 @@ import {
 @Injectable()
 export class AuthService extends BaseAuthRpcService {
   /** https://ngage.dev.v2.nuclent.com/docs#tag/Authentication/operation/AuthController_validateUsername */
-  processValidateUsername(payload: RpcValidateUsernameDto, span: SpanHandler): Promise<RpcValidateUsernameResponse> {
+  processValidateUsername(
+    {
+      // username to validate
+      username: _u,
+    }: RpcValidateUsernameDto,
+    // useful for logging request for debug purpose
+    _span: SpanHandler,
+  ): Promise<RpcValidateUsernameResponse> {
     throw new Error('Method not implemented.')
   }
 
   /** https://ngage.dev.v2.nuclent.com/docs#tag/Authentication/operation/AuthController_register */
-  processRegister(payload: RpcRegisterDto, span: SpanHandler): Promise<RpcRegisterResponse> {
+  processRegister(
+    // register account payload
+    _payload: RpcRegisterDto,
+    _span: SpanHandler,
+  ): Promise<RpcRegisterResponse> {
+    /**
+     * Should return new user id and status for nGage to store new user information
+     */
     throw new Error('Method not implemented.')
   }
 
   /** https://ngage.dev.v2.nuclent.com/docs#tag/Authentication/operation/AuthController_login */
-  processLogin(payload: RpcLoginDto, span: SpanHandler): Promise<RpcLoginResponse> {
+  processLogin(_payload: RpcLoginDto, _span: SpanHandler): Promise<RpcLoginResponse> {
     throw new Error('Method not implemented.')
   }
 
@@ -46,22 +60,22 @@ export class AuthService extends BaseAuthRpcService {
    * issued by the authorization server
    * and signed using the RS256
    */
-  processJwks(payload: RpcJwksDto, span: SpanHandler): Promise<RpcJwksResponse> {
+  processJwks(_payload: RpcJwksDto, _span: SpanHandler): Promise<RpcJwksResponse> {
     throw new Error('Method not implemented.')
   }
 
   /** https://ngage.dev.v2.nuclent.com/docs#tag/Authentication/operation/AuthController_logout */
-  processLogout(payload: RpcLogoutDto, span: SpanHandler): Promise<RpcLogoutResponse> {
+  processLogout(_payload: RpcLogoutDto, _span: SpanHandler): Promise<RpcLogoutResponse> {
     throw new Error('Method not implemented.')
   }
 
   /** https://ngage.dev.v2.nuclent.com/docs#tag/Authentication/operation/AuthController_changePassword */
-  processChangePassword(payload: RpcChangePasswordDto, span: SpanHandler): Promise<RpcChangePasswordResponse> {
+  processChangePassword(_payload: RpcChangePasswordDto, _span: SpanHandler): Promise<RpcChangePasswordResponse> {
     throw new Error('Method not implemented.')
   }
 
   /** https://ngage.dev.v2.nuclent.com/docs#tag/Authentication/operation/AuthController_forgotPassword */
-  processForgotPassword(payload: RpcForgotPasswordDto, span: SpanHandler): Promise<RpcForgotPasswordResponse> {
+  processForgotPassword(_payload: RpcForgotPasswordDto, _span: SpanHandler): Promise<RpcForgotPasswordResponse> {
     throw new Error('Method not implemented.')
   }
 }
