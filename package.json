@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "prepare": "husky install",
     "start": "nx serve",
     "build": "nx build",
+    "build:check": "tsc -p tsconfig.base.json --noEmit --declaration false --declarationMap false",
     "test": "nx test"
   },
   "private": true,
@@ -17,7 +19,9 @@
     "@nuclent/be-caching": "^0.2",
     "@nuclent/be-core": "^0.2",
     "@nuclent/ngage-be-common": "^0.1",
+    "@nuclent/ngage-ekyc": "^0.1",
     "@nuclent/ngage-spaces": "^0.1",
+    "@nuclent/ngage-statistics": "^0.1",
     "@nuclent/ngage-users": "^0.1",
     "nats": "^2.8",
     "reflect-metadata": "^0.1.13",
@@ -45,6 +49,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "glob": "^8.0.3",
+    "husky": "^8.0.2",
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
     "nx": "14.8.6",
