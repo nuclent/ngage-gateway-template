@@ -1,4 +1,4 @@
-import { INestApplication, InternalServerErrorException } from '@nestjs/common'
+import { INestApplication } from '@nestjs/common'
 import { CommonModule, natsEnv, NatsConsumerModule, baseEnv, appConfig, NatsClientService } from '@nuclent/be-core'
 import { RpcActionEnum, RpcActionPayload } from '@nuclent/ngage-be-common'
 import { buildTestModule, context } from '@nuclent/be-testing'
@@ -96,9 +96,9 @@ describe('Auth - e2e', () => {
 
       await expect(cmdValidateUsername(nats, RpcActionEnum.pre, payload)).resolves.toStrictEqual({})
       expect(preFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
-      await expect(cmdValidateUsername(nats, RpcActionEnum.process, payload)).rejects.toThrow(
-        InternalServerErrorException,
-      )
+      await expect(cmdValidateUsername(nats, RpcActionEnum.process, payload)).rejects.toMatchObject({
+        response: { data: { additional: 'Method not implemented.' } },
+      })
       expect(processFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
       await expect(cmdValidateUsername(nats, RpcActionEnum.post, { ...payload, response: res })).resolves.toStrictEqual(
         {},
@@ -121,7 +121,9 @@ describe('Auth - e2e', () => {
 
       await expect(cmdRegister(nats, RpcActionEnum.pre, payload)).resolves.toStrictEqual({})
       expect(preFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
-      await expect(cmdRegister(nats, RpcActionEnum.process, payload)).rejects.toThrow(InternalServerErrorException)
+      await expect(cmdRegister(nats, RpcActionEnum.process, payload)).rejects.toMatchObject({
+        response: { data: { additional: 'Method not implemented.' } },
+      })
       expect(processFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
       await expect(cmdRegister(nats, RpcActionEnum.post, { ...payload, response: res })).resolves.toStrictEqual({})
       expect(postFn).toHaveBeenCalledWith(expectRes({ ...payload, response: res }), expect.anything())
@@ -137,7 +139,9 @@ describe('Auth - e2e', () => {
 
       await expect(cmdGetJwks(nats, RpcActionEnum.pre, payload)).resolves.toStrictEqual({})
       expect(preFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
-      await expect(cmdGetJwks(nats, RpcActionEnum.process, payload)).rejects.toThrow(InternalServerErrorException)
+      await expect(cmdGetJwks(nats, RpcActionEnum.process, payload)).rejects.toMatchObject({
+        response: { data: { additional: 'Method not implemented.' } },
+      })
       expect(processFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
       await expect(cmdGetJwks(nats, RpcActionEnum.post, { ...payload, response: res })).resolves.toStrictEqual({})
       expect(postFn).toHaveBeenCalledWith(expectRes({ ...payload, response: res }), expect.anything())
@@ -153,7 +157,9 @@ describe('Auth - e2e', () => {
 
       await expect(cmdUserLogin(nats, RpcActionEnum.pre, payload)).resolves.toStrictEqual({})
       expect(preFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
-      await expect(cmdUserLogin(nats, RpcActionEnum.process, payload)).rejects.toThrow(InternalServerErrorException)
+      await expect(cmdUserLogin(nats, RpcActionEnum.process, payload)).rejects.toMatchObject({
+        response: { data: { additional: 'Method not implemented.' } },
+      })
       expect(processFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
       await expect(cmdUserLogin(nats, RpcActionEnum.post, { ...payload, response: res })).resolves.toStrictEqual({})
       expect(postFn).toHaveBeenCalledWith(expectRes({ ...payload, response: res }), expect.anything())
@@ -169,7 +175,9 @@ describe('Auth - e2e', () => {
 
       await expect(cmdUserLogout(nats, RpcActionEnum.pre, payload)).resolves.toStrictEqual({})
       expect(preFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
-      await expect(cmdUserLogout(nats, RpcActionEnum.process, payload)).rejects.toThrow(InternalServerErrorException)
+      await expect(cmdUserLogout(nats, RpcActionEnum.process, payload)).rejects.toMatchObject({
+        response: { data: { additional: 'Method not implemented.' } },
+      })
       expect(processFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
       await expect(cmdUserLogout(nats, RpcActionEnum.post, { ...payload, response: res })).resolves.toStrictEqual({})
       expect(postFn).toHaveBeenCalledWith(expectRes({ ...payload, response: res }), expect.anything())
@@ -185,9 +193,9 @@ describe('Auth - e2e', () => {
 
       await expect(cmdChangePassword(nats, RpcActionEnum.pre, payload)).resolves.toStrictEqual({})
       expect(preFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
-      await expect(cmdChangePassword(nats, RpcActionEnum.process, payload)).rejects.toThrow(
-        InternalServerErrorException,
-      )
+      await expect(cmdChangePassword(nats, RpcActionEnum.process, payload)).rejects.toMatchObject({
+        response: { data: { additional: 'Method not implemented.' } },
+      })
       expect(processFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
       await expect(cmdChangePassword(nats, RpcActionEnum.post, { ...payload, response: {} })).resolves.toStrictEqual({})
       expect(postFn).toHaveBeenCalledWith(expectRes({ ...payload, response: res }), expect.anything())
@@ -203,9 +211,9 @@ describe('Auth - e2e', () => {
 
       await expect(cmdForgotPassword(nats, RpcActionEnum.pre, payload)).resolves.toStrictEqual({})
       expect(preFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
-      await expect(cmdForgotPassword(nats, RpcActionEnum.process, payload)).rejects.toThrow(
-        InternalServerErrorException,
-      )
+      await expect(cmdForgotPassword(nats, RpcActionEnum.process, payload)).rejects.toMatchObject({
+        response: { data: { additional: 'Method not implemented.' } },
+      })
       expect(processFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
       await expect(cmdForgotPassword(nats, RpcActionEnum.post, { ...payload, response: {} })).resolves.toStrictEqual({})
       expect(postFn).toHaveBeenCalledWith(expectRes({ ...payload, response: res }), expect.anything())

@@ -1,4 +1,4 @@
-import { INestApplication, InternalServerErrorException } from '@nestjs/common'
+import { INestApplication } from '@nestjs/common'
 import { ClientNats } from '@nestjs/microservices'
 import { CommonModule, natsEnv, NatsConsumerModule, baseEnv, appConfig, NatsClientService } from '@nuclent/be-core'
 import { buildTestModule, context } from '@nuclent/be-testing'
@@ -101,9 +101,9 @@ describe('Spaces - e2e', () => {
 
       await expect(cmdSpacesGetSpaces(nats, RpcActionEnum.pre, payload)).resolves.toStrictEqual({})
       expect(preFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
-      await expect(cmdSpacesGetSpaces(nats, RpcActionEnum.process, payload)).rejects.toThrow(
-        InternalServerErrorException,
-      )
+      await expect(cmdSpacesGetSpaces(nats, RpcActionEnum.process, payload)).rejects.toMatchObject({
+        response: { data: { additional: 'Method not implemented.' } },
+      })
       expect(processFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
       await expect(cmdSpacesGetSpaces(nats, RpcActionEnum.post, { ...payload, response: res })).resolves.toStrictEqual(
         {},
@@ -126,9 +126,9 @@ describe('Spaces - e2e', () => {
 
       await expect(cmdSpacesCreateSpace(nats, RpcActionEnum.pre, payload)).resolves.toStrictEqual({})
       expect(preFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
-      await expect(cmdSpacesCreateSpace(nats, RpcActionEnum.process, payload)).rejects.toThrow(
-        InternalServerErrorException,
-      )
+      await expect(cmdSpacesCreateSpace(nats, RpcActionEnum.process, payload)).rejects.toMatchObject({
+        response: { data: { additional: 'Method not implemented.' } },
+      })
       expect(processFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
       await expect(
         cmdSpacesCreateSpace(nats, RpcActionEnum.post, { ...payload, response: res }),
@@ -146,9 +146,9 @@ describe('Spaces - e2e', () => {
 
       await expect(cmdSpacesGetSpaceById(nats, RpcActionEnum.pre, payload)).resolves.toStrictEqual({})
       expect(preFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
-      await expect(cmdSpacesGetSpaceById(nats, RpcActionEnum.process, payload)).rejects.toThrow(
-        InternalServerErrorException,
-      )
+      await expect(cmdSpacesGetSpaceById(nats, RpcActionEnum.process, payload)).rejects.toMatchObject({
+        response: { data: { additional: 'Method not implemented.' } },
+      })
       expect(processFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
       await expect(
         cmdSpacesGetSpaceById(nats, RpcActionEnum.post, { ...payload, response: res }),
@@ -166,9 +166,9 @@ describe('Spaces - e2e', () => {
 
       await expect(cmdSpacesUpdateSpace(nats, RpcActionEnum.pre, payload)).resolves.toStrictEqual({})
       expect(preFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
-      await expect(cmdSpacesUpdateSpace(nats, RpcActionEnum.process, payload)).rejects.toThrow(
-        InternalServerErrorException,
-      )
+      await expect(cmdSpacesUpdateSpace(nats, RpcActionEnum.process, payload)).rejects.toMatchObject({
+        response: { data: { additional: 'Method not implemented.' } },
+      })
       expect(processFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
       await expect(
         cmdSpacesUpdateSpace(nats, RpcActionEnum.post, { ...payload, response: res }),
@@ -186,9 +186,9 @@ describe('Spaces - e2e', () => {
 
       await expect(cmdSpacesDeleteSpace(nats, RpcActionEnum.pre, payload)).resolves.toStrictEqual({})
       expect(preFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
-      await expect(cmdSpacesDeleteSpace(nats, RpcActionEnum.process, payload)).rejects.toThrow(
-        InternalServerErrorException,
-      )
+      await expect(cmdSpacesDeleteSpace(nats, RpcActionEnum.process, payload)).rejects.toMatchObject({
+        response: { data: { additional: 'Method not implemented.' } },
+      })
       expect(processFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
       await expect(
         cmdSpacesDeleteSpace(nats, RpcActionEnum.post, { ...payload, response: res }),
@@ -206,9 +206,9 @@ describe('Spaces - e2e', () => {
 
       await expect(cmdSpacesGetBalance(nats, RpcActionEnum.pre, payload)).resolves.toStrictEqual({})
       expect(preFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
-      await expect(cmdSpacesGetBalance(nats, RpcActionEnum.process, payload)).rejects.toThrow(
-        InternalServerErrorException,
-      )
+      await expect(cmdSpacesGetBalance(nats, RpcActionEnum.process, payload)).rejects.toMatchObject({
+        response: { data: { additional: 'Method not implemented.' } },
+      })
       expect(processFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
       await expect(cmdSpacesGetBalance(nats, RpcActionEnum.post, { ...payload, response: res })).resolves.toStrictEqual(
         {},
