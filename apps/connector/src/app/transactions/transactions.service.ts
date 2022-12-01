@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common'
 import { SpanHandler } from '@nuclent/be-core'
 import {
   BaseRpcTransactionService,
+  RpcCreateTransactionDto,
+  RpcCreateTransactionResponse,
   RpcGetTransactionByIdDto,
   RpcGetTransactionByIdResponse,
   RpcListTransactionsDto,
@@ -18,11 +20,19 @@ import {
  */
 @Injectable()
 export class TransactionsService extends BaseRpcTransactionService {
-  /** https://ngage.dev.v2.nuclent.com/docs#tag/Statistics/operation/DeprecatedLogTransactionsController_getTransaction */
+  /** https://ngage.dev.v2.nuclent.com/docs#tag/Statistics/operation/TransactionsController_getTransaction */
   processGetTransactionById(
     _payload: RpcGetTransactionByIdDto,
     _span: SpanHandler,
   ): Promise<RpcGetTransactionByIdResponse> {
+    throw new Error('Method not implemented.')
+  }
+
+  /** https://ngage.dev.v2.nuclent.com/docs#tag/Statistics/operation/TransactionsController_create */
+  processCreateTransaction(
+    _payload: RpcCreateTransactionDto,
+    _span: SpanHandler,
+  ): Promise<RpcCreateTransactionResponse> {
     throw new Error('Method not implemented.')
   }
 

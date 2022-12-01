@@ -45,7 +45,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/connector"],
+      "outputs": ["{workspaceRoot}/coverage/apps/connector"],
       "options": {
         "jestConfig": "apps/connector/jest.config.ts",
         "passWithNoTests": true

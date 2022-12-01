@@ -94,7 +94,7 @@ describe('Spaces - e2e', () => {
 
   describe(CMD_SPACES_GET_SPACES, () => {
     const payload: RpcGetSpacesDto = { context, current: [current] }
-    const res: RpcGetSpacesResponse = { data: [{ balances: { totalBalance: 0, availableBalance: 0 } }] }
+    const res: RpcGetSpacesResponse = { data: [{ id: 'space-id', balances: { totalBalance: 0, availableBalance: 0 } }] }
 
     it('should be OK', async () => {
       const { preFn, postFn, processFn } = global.rpcSpyOn(service, 'GetSpaces', res)

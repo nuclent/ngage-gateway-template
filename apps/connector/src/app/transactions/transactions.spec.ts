@@ -6,16 +6,20 @@ import { RpcActionEnum, RpcActionPayload } from '@nuclent/ngage-be-common'
 import { BaseEkycRpcService } from '@nuclent/ngage-ekyc'
 import {
   BaseRpcTransactionModule,
+  cmdCreateTransaction,
   cmdGetTransactionById,
   cmdListTransactions,
   cmdSearchTransactions,
   cmdUpdateTransaction,
+  CMD_CREATE_TRANSACTION,
   CMD_GET_TRANSACTION_BY_ID,
   CMD_LIST_TRANSACTIONS,
   CMD_SEARCH_TRANSACTIONS,
   CMD_UPDATE_TRANSACTION,
   registerRpcTransactionService,
   RpcActionTransactionPayload,
+  RpcCreateTransactionDto,
+  RpcCreateTransactionResponse,
   RpcGetTransactionByIdDto,
   RpcGetTransactionByIdResponse,
   RpcListTransactionsDto,
@@ -128,6 +132,34 @@ describe('Ekyc - e2e', () => {
       expect(processFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
       await expect(
         cmdGetTransactionById(nats, RpcActionEnum.post, { ...payload, response: res }),
+      ).resolves.toStrictEqual({})
+      expect(postFn).toHaveBeenCalledWith(expectRes({ ...payload, response: res }), expect.anything())
+    })
+  })
+
+  describe(CMD_CREATE_TRANSACTION, () => {
+    const payload: RpcCreateTransactionDto = {
+      payload: {
+        amount: 10000,
+        currencyCode: 'VND',
+        type: TransactionType.INTERNAL,
+        notes: 'notes',
+      },
+      context,
+    }
+    const res: RpcCreateTransactionResponse = { id: 'trx-id', trxId: 'trx-id', amount: 200 }
+
+    it('should be OK', async () => {
+      const { preFn, postFn, processFn } = global.rpcSpyOn(service, 'CreateTransaction', res)
+
+      await expect(cmdCreateTransaction(nats, RpcActionEnum.pre, payload)).resolves.toStrictEqual({})
+      expect(preFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
+      await expect(cmdCreateTransaction(nats, RpcActionEnum.process, payload)).rejects.toMatchObject({
+        response: { data: { additional: 'Method not implemented.' } },
+      })
+      expect(processFn).toHaveBeenCalledWith(expectRes(payload), expect.anything())
+      await expect(
+        cmdCreateTransaction(nats, RpcActionEnum.post, { ...payload, response: res }),
       ).resolves.toStrictEqual({})
       expect(postFn).toHaveBeenCalledWith(expectRes({ ...payload, response: res }), expect.anything())
     })
