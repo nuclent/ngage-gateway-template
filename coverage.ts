@@ -11,7 +11,7 @@ const BaseConfig: InitialOptionsTsJest = {
   testMatch: [...nxPreset.testMatch, '**/*.e2e-spec.ts'],
   transformIgnorePatterns: ['/node_modules/'],
   moduleFileExtensions: ['ts', 'js', 'json'],
-  detectOpenHandles: true,
+  detectOpenHandles: false,
   detectLeaks: false,
   collectCoverageFrom: ['**/*.ts'],
   coveragePathIgnorePatterns: ['/node_modules/', 'main.ts', 'index.ts', 'types/', 'env.ts'],
