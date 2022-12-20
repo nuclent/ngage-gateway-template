@@ -8,7 +8,7 @@ ARG DIST_PATH
 WORKDIR /server
 COPY --link yarn.lock ./
 COPY --link ${DIST_PATH}/package.json ./
-RUN yarn --frozen-lockfile --prod --offline --silent
+RUN yarn --prod --offline --silent
 
 FROM harbor.common.nuclent.com/library/node:16-alpine
 ARG SERVER_PROJECT
