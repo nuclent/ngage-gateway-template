@@ -50,6 +50,32 @@
         "jestConfig": "apps/connector/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "build-prod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "yarn rimraf dist/apps/connector",
+          "yarn nx run connector:build:production",
+          "node tools/scripts/prod-build.js apps/connector"
+        ],
+        "parallel": false
+      }
+    },
+    "publish-image": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/connector",
+        "commands": ["publish-images.sh -s shared -p multiarch"],
+        "parallel": false
+      }
+    },
+    "rollout-k8s": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["rollout-k8s.sh $KUBE_CONNECTOR"],
+        "parallel": false
+      }
     }
   },
   "tags": []
