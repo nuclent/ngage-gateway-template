@@ -33,7 +33,7 @@
       "!{projectRoot}/jest.config.[jt]s",
       "!{projectRoot}/.eslintrc.json"
     ],
-    "sharedGlobals": ["!{projectRoot}/yarn.lock"]
+    "sharedGlobals": ["{projectRoot}/yarn.lock"]
   },
   "defaultProject": "connector"
 }
